@@ -1,0 +1,36 @@
+@import 'variables';
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+
+  &::placeholder {
+    color: $black;
+  }
+}
+
+button {
+  background: transparent;
+  border: 0;
+  outline: none;
+}

@@ -1,0 +1,95 @@
+<template>
+  <div class="custom-select" @click="toggleDropdown">
+    <div class="selected-option" :class="{ open: isOpen }">
+      {{ selectedOption }}
+    </div>
+    <div v-if="isOpen" class="dropdown" ref="optionsRef">
+      <div
+        class="option"
+        v-for="(option, index) in options"
+        :key="index"
+        @click.stop="selectOption(option)"
+      >
+        {{ option }}
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { onClickOutside } from '@vueuse/core';
+
+const emit = defineEmits(['select']);
+
+defineProps({
+  options: {
+    type: Array,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    default: 'select',
+  },
+});
+
+const optionsRef = ref(null);
+
+const isOpen = ref(false);
+const selectedOption = ref('');
+
+const toggleDropdown = () => {
+  isOpen.value = !isOpen.value;
+};
+
+const selectOption = (option) => {
+  selectedOption.value = option;
+  toggleDropdown();
+  emit('select', selectedOption.value);
+};
+
+onClickOutside(optionsRef, () => toggleDropdown());
+</script>
+
+<style lang="scss" scoped>
+@import '@/variables';
+
+.custom-select {
+  position: relative;
+  width: 200px;
+}
+
+.selected-option {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid $salad;
+  background: $white;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  border: 1px solid $silver;
+  max-height: 150px;
+  width: 100%;
+  overflow-y: auto;
+  background: $white;
+}
+
+.dropdown.open {
+  display: block;
+}
+
+.option {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: $white;
+}
+</style>

@@ -1,0 +1,26 @@
+<template>
+  <div>
+    <header class="header">
+      <div class="test">hello</div>
+    </header>
+    <main></main>
+    <footer class="footer"></footer>
+  </div>
+</template>
+
+<script setup>
+import { useMain } from '@/composition';
+import { onBeforeMount } from 'vue';
+
+const { login } = useMain();
+</script>
+
+<style scoped>
+.header {
+  background: orange;
+
+  .test {
+    color: white;
+  }
+}
+</style>

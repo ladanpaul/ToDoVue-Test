@@ -1,0 +1,7 @@
+<template>
+  <div>Hello I am Main Page</div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+</script>
